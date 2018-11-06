@@ -3,6 +3,7 @@ import numpy as np
 import numpy.random as rnd
 
 class Grid:
+#petit commentaire    
     
     def __init__(self,L,J,beta) :
         angles = np.zeros((L,L))
