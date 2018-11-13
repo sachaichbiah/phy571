@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import numpy.random as rnd
-
+from collections import deque
 class Grid:
 #petit commentaire    
     
@@ -89,7 +89,32 @@ def Monte_carlo(config, length_cycle,n_cycles = 10000, n_warmup =1000):
     av_m2/=n_cycles
     av_e/=n_cycles
     av_e2/=n_cycles
-                
+
+def ClusterMove(config):
+    L = config.size
+    J = config.J
+    beta = config.beta
+    Angles =config.angles
+    theta = rnd.random()*2*np.pi #angle paramétrant le plan de symétrie, tel que alpha -> 2 theta- alpha
+    i, j = rnd.randint(L, size=(2))
+    Angles[i,j]*=-1
+    Angles[i,j]+=2*theta
+    toTreat = deque()
+    toTreat.append([i,j])
+    MarkPoints = np.zeros((L,L))
+    MarkPoints[i,j] = 1
+    #Elargissement du cluster :
+    while toTreat != deque() :
+        i,j = toTreat.popleft()
+        neighbors = [[(i+1)%L,j],[(i-1)%L,j],[i,(j+1)%L],[i,(j-1)%L]]
+        for x in neighbors :
+            if MarkPoints[x[0],x[1]]!=1 :
+                seuil = min(0,J*beta*(np.cos(Angles[i,j]-Angles[x[0],x[1]])-np.cos(Angles[i,j]+Angles[x[0],x[1]]-2*theta)))
+                if seuil<=np.log(1-rnd.random()):
+                    MarkPoints[x[0],x[1]]=1
+                    toTreat.append([x[0],x[1]])
+                    Angles[x[0],x[1]] = 2*theta -Angles[x[0],x[1]]
+
     """
     
 A=Grid()
