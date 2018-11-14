@@ -6,11 +6,6 @@ Created on Mon Nov 12 21:18:45 2018
 @author: sacha
 """
 
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import matplotlib.ticker as plticker
-from matplotlib import colors
-import time
 from Grid import *
 
 #Reglage des couleurs
@@ -30,10 +25,11 @@ norm = colors.BoundaryNorm(bounds, cmap.N)
 length_cycle =100
 nt = 200
 Sizefig=6
+sizeGrid=20
 
 
 # instantiate a configuration
-config=Grid(20,1,5)
+config=Grid(sizeGrid,1,40)
 Angles=config.angles
 U=np.cos(Angles)*2
 V=np.sin(Angles)*2
@@ -43,7 +39,7 @@ Q = ax1.quiver(U, V, units='width',minshaft = 1, minlength = 1, color = 'k')
 
 length_cycle=50  #servira plus tard pour plotter les fonctions
 n_cycles = 10000
-n_warmup =10000
+n_warmup =100000
 for i in range(n_warmup): 
     metropolis_move(config)
 
@@ -67,8 +63,8 @@ def do_mc_cycle(n):
     # draw gridlines
     ax1.set_title('XY spins')
     ax1.grid(which='major', axis='both', linestyle='-', color='w', linewidth=2)
-    ax1.set_xticks(np.arange(-0.5, 20, 1));
-    ax1.set_yticks(np.arange(-0.5, 20, 1));
+    ax1.set_xticks(np.arange(-0.5, sizeGrid, 1));
+    ax1.set_yticks(np.arange(-0.5, sizeGrid, 1));
     ax1.set_xticklabels([])
     ax1.set_yticklabels([])
     
@@ -88,9 +84,9 @@ def do_mc_cycle(n):
 
     
     
-    time.sleep(1) #To control the time, maybe delete it later
+ #To control the time, maybe delete it later
     
     
     return (Q)
 
-ani = animation.FuncAnimation(fig, do_mc_cycle, interval=100, blit=False)
+ani = animation.FuncAnimation(fig, do_mc_cycle, interval=10, blit=False)

@@ -2,6 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import numpy.random as rnd
 from collections import deque
+import matplotlib.animation as animation
+import matplotlib.ticker as plticker
+from matplotlib import colors
+import time
 class Grid:
 #petit commentaire    
     

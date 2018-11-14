@@ -6,11 +6,7 @@ Created on Mon Nov 12 21:18:45 2018
 @author: sacha
 """
 
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import matplotlib.ticker as plticker
-from matplotlib import colors
-import time
+
 from Grid import *
    
 
