@@ -115,6 +115,38 @@ def ClusterMove(config):
                     toTreat.append([x[0],x[1]])
                     Angles[x[0],x[1]] = 2*theta -Angles[x[0],x[1]]
 
+
+
+
+def Calcul_Circulation(Table): 
+    Circulation=0
+    count=0
+    for i in range(len(Table)):
+        if Table[i]>np.pi : 
+            Table[i]-=2*np.pi
+    for n in range(len(Table)):
+        
+        alpha=Table[(n+1)%len(Table)]-Table[n]
+        
+        if alpha>np.pi:
+            
+            alpha=-2*np.pi+alpha
+        if alpha <-np.pi : 
+            alpha+=2*np.pi
+        
+        
+        Circulation+=(alpha)
+
+    return(Circulation)    
+
+
+
+
+
+
+
+
+
     """
     
 A=Grid()
