@@ -103,6 +103,7 @@ def ClusterMove(config):
     toTreat.append([i,j])
     MarkPoints = np.zeros((L,L))
     MarkPoints[i,j] = 1
+    taille = 1
     #Elargissement du cluster :
     while toTreat != deque() :
         i,j = toTreat.popleft()
@@ -114,7 +115,8 @@ def ClusterMove(config):
                     MarkPoints[x[0],x[1]]=1
                     toTreat.append([x[0],x[1]])
                     Angles[x[0],x[1]] = 2*theta -Angles[x[0],x[1]]
-
+                    taille+=1
+    return taille
     """
     
 A=Grid()
