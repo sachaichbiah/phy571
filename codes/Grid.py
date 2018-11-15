@@ -2,6 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import numpy.random as rnd
 from collections import deque
+import matplotlib.animation as animation
+import matplotlib.ticker as plticker
+from matplotlib import colors
+import time
 class Grid:
 #petit commentaire    
     
@@ -115,8 +119,44 @@ def ClusterMove(config):
                     MarkPoints[x[0],x[1]]=1
                     toTreat.append([x[0],x[1]])
                     Angles[x[0],x[1]] = 2*theta -Angles[x[0],x[1]]
+<<<<<<< HEAD
                     taille+=1
     return taille
+=======
+
+
+
+
+def Calcul_Circulation(Table): 
+    Circulation=0
+    count=0
+    for i in range(len(Table)):
+        if Table[i]>np.pi : 
+            Table[i]-=2*np.pi
+    for n in range(len(Table)):
+        
+        alpha=Table[(n+1)%len(Table)]-Table[n]
+        
+        if alpha>np.pi:
+            
+            alpha=-2*np.pi+alpha
+        if alpha <-np.pi : 
+            alpha+=2*np.pi
+        
+        
+        Circulation+=(alpha)
+
+    return(Circulation)    
+
+
+
+
+
+
+
+
+
+>>>>>>> 67834ce71790ac6cb220daf32f803671b354fe2f
     """
     
 A=Grid()

@@ -12,13 +12,39 @@ from Grid import *
 #Reglage des couleurs
 Contrast_constant=1
 Clist=[]
-A=(np.linspace(1,0.2,10))*Contrast_constant
-B=(np.linspace(0.2,0.2,10))*Contrast_constant
-C=(np.linspace(0.2,1,10))*Contrast_constant
+#A=(np.linspace(1,0.2,10))*Contrast_constant
+#B=(np.linspace(0.2,0.2,10))*Contrast_constant
+#C=(np.linspace(0.2,1,10))*Contrast_constant
+
+
+A=(np.linspace(0,0,10))*Contrast_constant
+B=(np.linspace(0,0.5,10))*Contrast_constant
+C=(np.linspace(1,0.5,10))*Contrast_constant
+for i in range(10): 
+    Clist.append((A[i],B[i],C[i]))
+    
+A=(np.linspace(0,1,10))*Contrast_constant
+B=(np.linspace(0.5,0,10))*Contrast_constant
+C=(np.linspace(0.5,0,10))*Contrast_constant
+for i in range(10): 
+    Clist.append((A[i],B[i],C[i]))
+    
+A=(np.linspace(1,0.5,10))*Contrast_constant
+B=(np.linspace(0,0,10))*Contrast_constant
+C=(np.linspace(0,0.5,10))*Contrast_constant
+for i in range(10): 
+    Clist.append((A[i],B[i],C[i]))  
+    
+A=(np.linspace(0.5,0,10))*Contrast_constant
+B=(np.linspace(0,0,10))*Contrast_constant
+C=(np.linspace(0.5,1,10))*Contrast_constant
+for i in range(10): 
+    Clist.append((A[i],B[i],C[i]))
+
 for i in range(10): 
     Clist.append((A[i],B[i],C[i]))
 cmap = colors.ListedColormap(np.concatenate((Clist,np.flip(Clist,0)),axis=0))
-bounds = np.linspace(0,2*np.pi,20)
+bounds = np.linspace(0,2*np.pi,40)
 norm = colors.BoundaryNorm(bounds, cmap.N)
 
 
@@ -29,14 +55,14 @@ Sizefig=6
 
 
 # instantiate a configuration
-config=Grid(64,1,1.5)
+config=Grid(64,1,40)
 Angles=config.angles
 U=np.cos(Angles)*2
 V=np.sin(Angles)*2
 fig,ax1=plt.subplots(figsize=(Sizefig, Sizefig))
 ax1.set_title('XY spins')
 
-length_cycle=50  #servira plus tard pour plotter les fonctions
+length_cycle=5000  #servira plus tard pour plotter les fonctions
 n_cycles = 10000
 n_warmup =100000
 for i in range(n_warmup): 
@@ -91,4 +117,4 @@ def do_mc_cycle(n):
     
     return ()
 
-ani = animation.FuncAnimation(fig, do_mc_cycle, interval=10, blit=False)
+ani = animation.FuncAnimation(fig, do_mc_cycle, interval=1, blit=False)
