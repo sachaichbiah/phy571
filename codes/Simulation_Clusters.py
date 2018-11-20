@@ -47,11 +47,11 @@ ax2.set_xlim(0,nt)
 ax2.set_ylim(-1,1)
 steps = []
 clusters = []
-length_cycle=50  #servira plus tard pour plotter les fonctions
+length_cycle=1  #servira plus tard pour plotter les fonctions
 n_cycles = 10000
-n_warmup =10000
+n_warmup =5000
 for i in range(n_warmup): 
-    metropolis_move(config)
+    ClusterMove(config)
 
 
 def do_mc_cycle(n):
@@ -110,7 +110,7 @@ def do_cm_cycle(n):
     if len(clusters) < nt:
         clusters.append(taille)
         
-    if len(clusters) > nt:
+    if len(clusters) >= nt:
         clusters.append(taille)
         clusters.pop(0)
     line.set_data(steps,clusters)
@@ -139,4 +139,4 @@ def do_cm_cycle(n):
     
     
     
-ani = animation.FuncAnimation(fig, do_cm_cycle, interval=20, blit=False)
+ani = animation.FuncAnimation(fig, do_cm_cycle, interval=1, blit=False)

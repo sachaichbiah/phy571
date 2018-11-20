@@ -10,7 +10,7 @@ length_cycle =100
 nt = 200
 
 # instantiate a configuration
-config=Grid()
+config=Grid(50)
 Angles=config.angles
 U=np.cos(Angles)*5
 V=np.sin(Angles)*5
@@ -50,7 +50,7 @@ def do_mc_cycle(n):
     U=np.cos(Angles)*5
     V=np.sin(Angles)*5
     ax1.cla()
-    Q=(ax1.quiver(U,V))
+    Q=ax1.quiver(U,V,units='width',minshaft = 2)
     
     m = config.magnetization[0]/float(config.size**2)
     if len(steps) < nt: steps.append(n)
@@ -65,6 +65,6 @@ def do_mc_cycle(n):
     
     return (Q,line)
 
-ani = animation.FuncAnimation(fig, do_mc_cycle, interval=100, blit=False)
+ani = animation.FuncAnimation(fig, do_mc_cycle, interval=1, blit=False)
 
 

@@ -119,10 +119,8 @@ def ClusterMove(config):
                     MarkPoints[x[0],x[1]]=1
                     toTreat.append([x[0],x[1]])
                     Angles[x[0],x[1]] = 2*theta -Angles[x[0],x[1]]
-<<<<<<< HEAD
                     taille+=1
     return taille
-=======
 
 
 
@@ -148,15 +146,40 @@ def Calcul_Circulation(Table):
 
     return(Circulation)    
 
+def instant_correlation(R,config) :
+    L = config.size
+    Angles =config.angles
+    i, j = rnd.randint(L, size=(2)) # pick a random site
+    """k = rd.random()
+    a= int(R/np.sqrt(k**2+1))
+    b = a*k"""#one could take a random point i+a,j+b located at a distance R from i,j
+    return 1/4*(np.cos(Angles[i,j]-Angles[(i-R)%L,j])+np.cos(Angles[i,j]-Angles[(i+R)%L,j])+np.cos(Angles[i,j]-Angles[i,(j-R)%L])+np.cos(Angles[i,j]-Angles[i,(j+R)%L]))
+    
+def Calcul_Correlation(config,SamplePerGrid,NumberOfGrids,LengthCycle) :
+    L = config.size
+    Result = np.zeros(L//2)
+    
+    j=0
+    while j<(LengthCycle*NumberOfGrids) :
+        if (j%LengthCycle)==0 :
+            for R in range(L//2) :    
+                for k in range(SamplePerGrid):
+                    Result[R]+=float(instant_correlation(R,config))
+        ClusterMove(config)
+
+
+        j+=1
+    
+    Result = Result/(SamplePerGrid*NumberOfGrids)
+    return Result
+    
+            
 
 
 
 
 
 
-
-
->>>>>>> 67834ce71790ac6cb220daf32f803671b354fe2f
     """
     
 A=Grid()
