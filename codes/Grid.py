@@ -146,7 +146,13 @@ def Calcul_Circulation(Table):
 
     return(Circulation)    
 
-
+def instant_correlation(R,config) :
+    L = config.size
+    J = config.J
+    Angles =config.angles
+    i, j = rnd.randint(L, size=(2)) # pick a random site
+    return 1/2*(np.cos(Angles[i,j]-Angles[(i+R)%L,j])+np.cos(Angles[i,j]-Angles[i,(j+R)%L]))
+    
 
 
 
