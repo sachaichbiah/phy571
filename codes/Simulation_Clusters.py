@@ -49,7 +49,7 @@ steps = []
 clusters = []
 length_cycle=1  #servira plus tard pour plotter les fonctions
 n_cycles = 10000
-n_warmup =1000
+n_warmup =5000
 for i in range(n_warmup): 
     ClusterMove(config)
 
