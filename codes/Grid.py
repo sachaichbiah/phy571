@@ -119,10 +119,8 @@ def ClusterMove(config):
                     MarkPoints[x[0],x[1]]=1
                     toTreat.append([x[0],x[1]])
                     Angles[x[0],x[1]] = 2*theta -Angles[x[0],x[1]]
-<<<<<<< HEAD
                     taille+=1
     return taille
-=======
 
 
 
@@ -156,7 +154,6 @@ def Calcul_Circulation(Table):
 
 
 
->>>>>>> 67834ce71790ac6cb220daf32f803671b354fe2f
     """
     
 A=Grid()
