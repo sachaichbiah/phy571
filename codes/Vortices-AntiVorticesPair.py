@@ -8,10 +8,9 @@ Created on Mon Nov 12 21:18:45 2018
 
 
 from Grid import *
-   
+from Fonctions import *
 
-
-def do_mc_cycle(n):
+def do_mc_cycle_Vortices(n):
     
     for k in range(length_cycle):
         metropolis_move(config)
@@ -74,6 +73,7 @@ def carreDR(Table,i,j):
 
 
 
+#Colors
 CC=0.9
 Clist=[(0.6*CC,1*CC,0.6*CC),(1*CC,1*CC,1*CC),(0.6*CC,0.6*CC,1*CC)]
 cmap = colors.ListedColormap(Clist)
@@ -82,14 +82,17 @@ norm = colors.BoundaryNorm(bounds, cmap.N)
 
 
 #Constantes de la simulation
-length_cycle =100
+length_cycle =300
 nt = 200
 Sizefig=6
-sizeGrid=40
-
+sizeGrid=30
+J=1
+Beta=1
+n_cycles = 10000
+n_warmup=1000
 
 # instantiate a configuration
-config=Grid(sizeGrid,1,40)
+config=Grid(sizeGrid,J,Beta)
 Angles=config.angles
 U=np.cos(Angles)*2
 V=np.sin(Angles)*2
@@ -97,47 +100,10 @@ fig,ax1=plt.subplots(figsize=(Sizefig, Sizefig))
 ax1.set_title('XY spins')
 Q = ax1.quiver(U, V, units='width',minshaft = 1, minlength = 1, color = 'k')
 
-length_cycle=5000  #servira plus tard pour plotter les fonctions
-n_cycles = 10000
-n_warmup =100000
+
 for i in range(n_warmup): 
     metropolis_move(config)
 
-ani = animation.FuncAnimation(fig, do_mc_cycle, interval=1, blit=False)
+ani = animation.FuncAnimation(fig, do_mc_cycle_Vortices, interval=1, blit=False)
 
 
-
-"""
-def carreUR(Table,i,j):
-    size=len(Table)
-    return([Table[i-1,j],Table[i,j],Table[i,(j+1)%size],Table[i-1,(j+1)%size]])
-
-def carreUL(Table,i,j):
-    return([Table[i-1,j-1],Table[i,j-1],Table[i,j],Table[i-1,j]])
-def carreDL(Table,i,j):
-    size=len(Table)
-    return([Table[i,j-1],Table[(i+1)%size,j-1],Table[(i+1)%size,j],Table[i,j]])
-    
-    
-Clist=[]
-
-#Reglage des couleurs
-Contrast_constant=0.9
-Clist=[]
-
-A=(np.linspace(0.6,1,10)-0.1)*Contrast_constant
-B=(np.linspace(1,1,10)-0.1)*Contrast_constant
-C=(np.linspace(0.6,1,10)-0.1)*Contrast_constant
-for i in range(10): 
-    Clist.append((A[i],B[i],C[i]))
-
-A=(np.linspace(1,0.6,10)-0.1)*Contrast_constant
-B=(np.linspace(1,0.6,10)-0.1)*Contrast_constant
-C=(np.linspace(1,1,10)-0.1)*Contrast_constant
-for i in range(10): 
-    Clist.append((A[i],B[i],C[i]))
-    
-
-cmap = colors.ListedColormap(Clist)
-bounds=np.linspace(-6,6,20)
-"""
