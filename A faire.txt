@@ -1,0 +1,4 @@
+- Calcul de la fonciton de corrélation
+- Longueur de corrélation
+- Histogramme corrélation/température
+- Curseur interactif température
