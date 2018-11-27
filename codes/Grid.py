@@ -9,11 +9,12 @@ import time
 class Grid:
 #petit commentaire    
     
-    def __init__(self,L=10,J=1,beta=1) :
+    def __init__(self,L=10,J=1,beta=1,h=np.array([0,0])) :
         angles = np.zeros((L,L))
         self.beta = beta
         self.size=L
         self.J=J
+        self.h=h
         for i in range(L) :
             for j in range(L) :
                 angles[i,j] = 2*np.pi*rnd.random()
@@ -56,6 +57,8 @@ def metropolis_move(config):
     Angles =config.angles
     
     beta = config.beta
+    
+    h= config.h
     i, j = rnd.randint(L, size=(2)) # pick a random site
     tetaNew=rnd.rand()*2*np.pi
     tetaOld=Angles[i,j]
@@ -68,7 +71,11 @@ def metropolis_move(config):
     
     # accept modification with Metropolis probability
     # if not accepted: leave configuration unchanged
-    if (rnd.random() < np.exp(-beta*delta_energy)):
+
+    Magn= np.vdot(h,np.array([np.cos(tetaNew),np.sin(tetaNew)]))-np.vdot(h,np.array([np.cos(tetaOld),np.sin(tetaOld)]))
+    #print(Magn)
+    
+    if (rnd.random() < np.exp(-beta*(delta_energy-Magn))):
         config.angles[i,j]=tetaNew
         config.energy += delta_energy
         config.magnetization += np.add(np.array([np.cos(tetaNew),np.sin(tetaNew)]),np.array([np.cos(tetaOld),np.sin(tetaOld)])*(-1))
@@ -174,7 +181,13 @@ def Calcul_Correlation(config,SamplePerGrid,NumberOfGrids,LengthCycle) :
     return Result
     
             
-
+def Calcul_Magnetisation(config): 
+    M=0
+    for i in range(config.size) : 
+        for j in range(config.size):
+            M=np.add(M,np.array([np.cos(config.angles[i,j]),np.sin(config.angles[i,j])]))
+    m=np.linalg.norm(M/(config.size**2))
+    return(m)
 
 
 
