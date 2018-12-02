@@ -183,11 +183,13 @@ def Calcul_Correlation(config,SamplePerGrid,NumberOfGrids,LengthCycle) :
             
 def Calcul_Magnetisation(config): 
     M=0
+    n=0
     for i in range(config.size) : 
         for j in range(config.size):
             M=np.add(M,np.array([np.cos(config.angles[i,j]),np.sin(config.angles[i,j])]))
-    m=np.linalg.norm(M/(config.size**2))
-    return(m)
+            n+=1
+    Magnet=M*(1/n)
+    return(Magnet)
 
 
 
