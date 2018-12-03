@@ -16,11 +16,11 @@ from matplotlib import colors
 import time
 from Grid import *
 # instantiate a configuration
-SamplePerGrid=10
+SamplePerGrid=20
 NumberOfGrids=1
-LengthCycle=10
+LengthCycle=5
 
-config1=Grid(64,1,0.9)
+config1=Grid(128,1,0.9)
 #initiate figure
 fig = plt.figure()
 ax = fig.add_subplot(111)
@@ -33,25 +33,28 @@ ax.set_ylim(0,1)
 
 
 #Warmup
-n_warmup =100
+n_warmup =1500
 Xaxis=[]
 Yaxis=[]
 
 
 #anim = animation.FuncAnimation(fig, animate, interval=1, blit=False)
 #Write in Excel
-workbook = xlsxwriter.Workbook('Correlations.xlsx')
+workbook = xlsxwriter.Workbook('Correlations128.xlsx')
 worksheet = workbook.add_worksheet()
 worksheet.write(0,0, 'Beta')
 
 
-temperatures = np.arange(0.7,1.5,0.5)
+temperatures = np.arange(0.6,1.5,0.05)
+#temperatures=np.concatenate((temperatures,np.arange(0.5,1,0.1),np.arange(1.2,1.7,0.1),np.arange(1.7,6,0.5)))
+#temperatures.sort()
+#temperatures = temperatures[13:20]
 liste = []
 N_iterations = 1000
 for j in range(len(temperatures)) :
     line, = ax.plot([], [])
     lines.append(line)
-    config=Grid(64,1,temperatures[j])
+    config=Grid(128,1,temperatures[j])
     for i in range(n_warmup) :
         ClusterMove(config)
     liste.append(config)

@@ -3,3 +3,5 @@
 - Histogramme corrélation/température
 - Curseur interactif température
 - Moyenne glissante sur taille de clusters pour évaluer convergence
+- Demo balance détaillée
+- Comparer susceptibilité, taille clusters, longueur de corrélation
