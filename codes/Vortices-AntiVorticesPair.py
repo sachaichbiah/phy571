@@ -8,9 +8,10 @@ Created on Mon Nov 12 21:18:45 2018
 
 
 from Grid import *
-from Fonctions import *
+   
 
-def do_mc_cycle_Vortices(n):
+
+def do_mc_cycle(n):
     
     for k in range(length_cycle):
         metropolis_move(config)
@@ -57,7 +58,7 @@ def do_mc_cycle_Vortices(n):
 
     ax1.imshow(data, cmap=cmap, norm=norm)
     ax1.set_title('XY spins')
-    ax1.grid(which='major', axis='both', linestyle='-', color='w', linewidth=2)
+    ax1.grid(which='major', axis='both', linestyle='-', color='w', linewidth=.2)
     ax1.set_xticks(np.arange(-0.5, sizeGrid, 1));
     ax1.set_yticks(np.arange(-0.5, sizeGrid, 1));
     ax1.set_xticklabels([])
@@ -73,7 +74,6 @@ def carreDR(Table,i,j):
 
 
 
-#Colors
 CC=0.9
 Clist=[(0.6*CC,1*CC,0.6*CC),(1*CC,1*CC,1*CC),(0.6*CC,0.6*CC,1*CC)]
 cmap = colors.ListedColormap(Clist)
@@ -82,28 +82,24 @@ norm = colors.BoundaryNorm(bounds, cmap.N)
 
 
 #Constantes de la simulation
-length_cycle =300
-nt = 200
+length_cycle =100
 Sizefig=6
-sizeGrid=30
-J=1
-Beta=1
-n_cycles = 10000
-n_warmup=1000
+sizeGrid=20
+
 
 # instantiate a configuration
-config=Grid(sizeGrid,J,Beta)
+config=Grid(sizeGrid,1,1.5,np.array([0,0]))
 Angles=config.angles
 U=np.cos(Angles)*2
 V=np.sin(Angles)*2
-fig,ax1=plt.subplots(figsize=(Sizefig, Sizefig))
+fig,ax1=plt.subplots(figsize=(Sizefig+4, Sizefig))
 ax1.set_title('XY spins')
 Q = ax1.quiver(U, V, units='width',minshaft = 1, minlength = 1, color = 'k')
 
-
+length_cycle=50 #servira plus tard pour plotter les fonctions
+n_cycles = 10000
+n_warmup =10000
 for i in range(n_warmup): 
     metropolis_move(config)
 
-ani = animation.FuncAnimation(fig, do_mc_cycle_Vortices, interval=1, blit=False)
-
-
+ani = animation.FuncAnimation(fig, do_mc_cycle,np.arange(1, 100000), interval=1, blit=False)

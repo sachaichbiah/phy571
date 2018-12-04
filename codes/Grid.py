@@ -134,7 +134,7 @@ def ClusterMove(config):
 
 def Calcul_Circulation(Table): 
     Circulation=0
-    count=0
+
     for i in range(len(Table)):
         if Table[i]>np.pi : 
             Table[i]-=2*np.pi
@@ -192,7 +192,22 @@ def Calcul_Magnetisation(config):
     return(Magnet)
 
 
-
+def Calcul_Energy(config): 
+    E=0
+    L=config.size
+    J=config.J
+    Angles=config.angles
+    for i in range(config.size): 
+        for j in range(config.size): 
+            
+            
+                coef= J/2
+                delta_energy =  -coef* (np.cos(Angles[i,j]-Angles[i,(j+1)%L])
+                + np.cos(Angles[i,j]-Angles[i,(j-1)%L])
+                + np.cos(Angles[i,j]-Angles[(i+1)%L,j])
+                + np.cos(Angles[i,j]-Angles[(i-1)%L,j]))
+                E+=delta_energy + np.dot(np.array([np.cos(Angles[i,j]),np.sin(Angles[i,j])]),config.h)
+    return(E)
 
 
     """
