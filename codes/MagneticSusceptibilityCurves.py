@@ -19,7 +19,7 @@ MeansSquare=np.load("ResultsSquare2Magnetization.npy")
 
 
 x=Beta
-y=np.multiply(1/Beta,(MeansSquare-Means**2))
+y=np.multiply(Beta,(MeansSquare-Means**2))
 
 plt.figure()
 plt.ylabel("Magnetic susceptibility")
@@ -28,7 +28,7 @@ plt.xlabel("Beta")
 plt.plot(x,y,"o")
 
 x=1/Beta
-y=np.multiply(1/Beta,(MeansSquare-Means**2))
+y=np.multiply(Beta,(MeansSquare-Means**2))
 
 plt.figure()
 plt.ylabel("Magnetic susceptibility")
