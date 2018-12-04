@@ -209,31 +209,3 @@ def Calcul_Energy(config):
                 E+=delta_energy + np.dot(np.array([np.cos(Angles[i,j]),np.sin(Angles[i,j])]),config.h)
     return(E)
 
-
-    """
-    
-A=Grid()
-printGrid(A)
-L=A.size
-Monte_carlo(A,L)
-printGrid(A)
-
-"""
-
-"""
-L=50
-Gridex = Grid(L,1,1)
-
-Angles = Gridex.angles
-U=np.cos(Angles)*5
-V=np.sin(Angles)*5
-
-fig1, ax1 = plt.subplots()
-ax1.set_title('XY spins')
-Q = ax1.quiver(U, V, units='width',minshaft = 2)
-plt.show()      
-     """
-        
-    
-    
-    
