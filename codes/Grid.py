@@ -134,7 +134,7 @@ def ClusterMove(config):
 
 def Calcul_Circulation(Table): 
     Circulation=0
-
+    count=0
     for i in range(len(Table)):
         if Table[i]>np.pi : 
             Table[i]-=2*np.pi
@@ -157,10 +157,8 @@ def instant_correlation(R,config) :
     L = config.size
     Angles =config.angles
     i, j = rnd.randint(L, size=(2)) # pick a random site
-    """k = rd.random()
-    a= int(R/np.sqrt(k**2+1))
-    b = a*k"""#one could take a random point i+a,j+b located at a distance R from i,j
-    return 1/4*(np.cos(Angles[i,j]-Angles[(i-R)%L,j])+np.cos(Angles[i,j]-Angles[(i+R)%L,j])+np.cos(Angles[i,j]-Angles[i,(j-R)%L])+np.cos(Angles[i,j]-Angles[i,(j+R)%L]))
+    
+    return 1/4*(np.cos(Angles[i,j]-Angles[(i-R)%L,j])+np.cos(Angles[i,j]-Angles[(i+R)%L,j])+np.cos(Angles[i,j]-Angles[i,(j-R)%L])+np.cos(Angles[i,j]-Angles[i,(j+R)%L]))#return the correlation with 4 points located at a distance of R
     
 def Calcul_Correlation(config,SamplePerGrid,NumberOfGrids,LengthCycle) :
     L = config.size
@@ -171,7 +169,7 @@ def Calcul_Correlation(config,SamplePerGrid,NumberOfGrids,LengthCycle) :
         if (j%LengthCycle)==0 :
             for R in range(L//2) :    
                 for k in range(SamplePerGrid):
-                    Result[R]+=float(instant_correlation(R,config))
+                    Result[R]+=float(instant_correlation(R,config))#for each value of R, 
         ClusterMove(config)
 
 
@@ -192,20 +190,33 @@ def Calcul_Magnetisation(config):
     return(Magnet)
 
 
-def Calcul_Energy(config): 
-    E=0
-    L=config.size
-    J=config.J
-    Angles=config.angles
-    for i in range(config.size): 
-        for j in range(config.size): 
-            
-            
-                coef= J/2
-                delta_energy =  -coef* (np.cos(Angles[i,j]-Angles[i,(j+1)%L])
-                + np.cos(Angles[i,j]-Angles[i,(j-1)%L])
-                + np.cos(Angles[i,j]-Angles[(i+1)%L,j])
-                + np.cos(Angles[i,j]-Angles[(i-1)%L,j]))
-                E+=delta_energy + np.dot(np.array([np.cos(Angles[i,j]),np.sin(Angles[i,j])]),config.h)
-    return(E)
 
+
+
+    """
+    
+A=Grid()
+printGrid(A)
+L=A.size
+Monte_carlo(A,L)
+printGrid(A)
+
+"""
+
+"""
+L=50
+Gridex = Grid(L,1,1)
+
+Angles = Gridex.angles
+U=np.cos(Angles)*5
+V=np.sin(Angles)*5
+
+fig1, ax1 = plt.subplots()
+ax1.set_title('XY spins')
+Q = ax1.quiver(U, V, units='width',minshaft = 2)
+plt.show()      
+     """
+        
+    
+    
+    
