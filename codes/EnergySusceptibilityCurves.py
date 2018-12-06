@@ -23,7 +23,7 @@ x=Beta
 y=np.multiply(Beta**2,(MeansSquare-Means**2))
 
 plt.figure()
-plt.ylabel("Thermic capacity/kb")
+plt.ylabel("Heat capacity/kb")
 plt.xlabel("Beta")
 
 plt.plot(x,y,"o")
@@ -32,7 +32,7 @@ x=1/Beta
 y=np.multiply(Beta**2,(MeansSquare-Means**2))
 
 plt.figure()
-plt.ylabel("Thermic capacity/kb")
-plt.xlabel("T")
+plt.ylabel("Heat capacity/kb")
+plt.xlabel("kb*T")
 
 plt.plot(x,y,"o")
