@@ -2,8 +2,10 @@ from openpyxl import load_workbook
 import imageio as io
 import os
 from PIL import Image
-#file_names = sorted((fn for fn in os.listdir('.') if fn.startswith('surface')))
-#making animation
+import matplotlib.pyplot as plt
+from matplotlib import pylab
+import numpy as np
+from scipy.optimize import curve_fit
 
 wb = load_workbook(filename='Correlations64_20_1000_10_de 0.6 a 35.xlsx', read_only=True)
 ws = wb['Sheet1']
@@ -28,14 +30,6 @@ for i in range(0,N):
         
     Values.append(Data)
 
-
-
-import matplotlib.pyplot as plt
-from matplotlib import pylab
-
-# Scientific libraries
-import numpy as np
-from scipy.optimize import curve_fit
  
 NAME=[]
 PoptE=[]
@@ -47,18 +41,13 @@ X[0]+=0.0001
 p0e=(.7,.6,.2)
 p0p=(0.85,-0.15,-0.35)
 
-for i in range(1,34):#len(Values)): 
+for i in range(1,len(Values)): 
     Data=[]
     Beta=Values[i][0]
     for j in range(2,len(Values[0])):
         Data.append(Values[i][j])
     x=X
     y=Data
-    
-    
-    #plt.figure()
-    #plt.plot(X,Data)
-    
     
     popte, pcove = curve_fit(exponenial_func, x, y, p0=p0e)
     poptp, pcovp = curve_fit(powerlaw_func,x,y, p0=p0p, maxfev=30000)
@@ -75,9 +64,7 @@ for i in range(1,34):#len(Values)):
     plt.plot(x,y,'o', xx, yye, "green")
     plt.plot(xx,yyp, "red")
     pylab.title('Exponential (green) and Powerlaw (red) fits, Beta = '+str(Beta))
-    #ax = plt.gca()
-    #ax.set_axis_bgcolor((0.898, 0.898, 0.898))
-    fig = plt.gcf()
+    
     PoptE.append(1/popte[1])
     BETA.append(Beta)
     print(poptp, Beta)
