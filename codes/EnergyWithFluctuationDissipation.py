@@ -14,7 +14,7 @@ sizeGrid=16
 Nspins=sizeGrid**2
 beta=.1
 
-### Dans le cas du cluster move
+#Parameters of the simulation
 n_cycles=2000
 length_cycle=10
 n_warmup =1000
