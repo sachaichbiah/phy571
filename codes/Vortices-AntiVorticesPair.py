@@ -64,7 +64,7 @@ cmap = colors.ListedColormap(Clist)
 bounds=[-6,-1,1,6]
 norm = colors.BoundaryNorm(bounds, cmap.N)
 
-#Constantes de la simulation
+#Parameters of the simulation
 length_cycle =100
 Sizefig=6
 sizeGrid=20
