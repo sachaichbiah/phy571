@@ -33,7 +33,7 @@ Sizefig=6
 
 
 # instantiate a configuration
-config=Grid(64,1,1.7)
+config=Grid(128,1,1.7)
 Angles=config.angles
 U=np.cos(Angles)*2
 V=np.sin(Angles)*2
@@ -49,7 +49,7 @@ steps = []
 clusters = []
 length_cycle=1  #servira plus tard pour plotter les fonctions
 n_cycles = 10000
-n_warmup =100
+n_warmup =500
 for i in range(n_warmup): 
     ClusterMove(config)
 
