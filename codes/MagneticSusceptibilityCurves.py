@@ -7,8 +7,6 @@ Created on Wed Nov 28 08:24:57 2018
 """
 import matplotlib.pyplot as plt
 from matplotlib import pylab
-
-# Scientific libraries
 import numpy as np
 from scipy.optimize import curve_fit
 
@@ -32,7 +30,7 @@ y=np.multiply(Beta,(MeansSquare-Means**2))
 
 plt.figure()
 plt.ylabel("Magnetic susceptibility")
-plt.xlabel("T")
+plt.xlabel("kb*T")
 
 plt.plot(x,y,"o")
 

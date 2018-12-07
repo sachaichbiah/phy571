@@ -1,16 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 12 21:18:45 2018
-
-@author: sacha
-"""
-
-
 from Grid import *
    
-
-
 def do_mc_cycle(n):
     
     for k in range(length_cycle):
@@ -64,14 +53,9 @@ def do_mc_cycle(n):
     ax1.set_xticklabels([])
     ax1.set_yticklabels([])
     
-
- 
-
 def carreDR(Table,i,j):
     size=len(Table)
     return([Table[i,j],Table[(i+1)%size,j],Table[(i+1)%size,(j+1)%size],Table[i,(j+1)%size]])
-
-
 
 
 CC=0.9
@@ -80,12 +64,11 @@ cmap = colors.ListedColormap(Clist)
 bounds=[-6,-1,1,6]
 norm = colors.BoundaryNorm(bounds, cmap.N)
 
-
-#Constantes de la simulation
+#Parameters of the simulation
 length_cycle =100
 Sizefig=6
 sizeGrid=20
-
+n_warmup =10000
 
 # instantiate a configuration
 config=Grid(sizeGrid,1,1.5,np.array([0,0]))
@@ -96,9 +79,6 @@ fig,ax1=plt.subplots(figsize=(Sizefig+4, Sizefig))
 ax1.set_title('XY spins')
 Q = ax1.quiver(U, V, units='width',minshaft = 1, minlength = 1, color = 'k')
 
-length_cycle=50 #servira plus tard pour plotter les fonctions
-n_cycles = 10000
-n_warmup =10000
 for i in range(n_warmup): 
     metropolis_move(config)
 

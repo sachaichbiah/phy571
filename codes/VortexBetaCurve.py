@@ -1,26 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 12 21:18:45 2018
-
-@author: sacha
-"""
-
-
 from Grid import *
-
-
-
 
 def carreDR(Table,i,j):
     size=len(Table)
     return([Table[i,j],Table[(i+1)%size,j],Table[(i+1)%size,(j+1)%size],Table[i,(j+1)%size]])
-
-
-
-
-
-
 
 #Constantes de la simulation
 length_cycle =1000
@@ -33,7 +15,6 @@ n_cycles=12000
 # instantiate a configuration
 config=Grid(sizeGrid,J,Beta)
 
-
 def monte_Carlo(n_cycles,n_warmup,config):
     
     for i in range(n_warmup): 
@@ -44,12 +25,8 @@ def monte_Carlo(n_cycles,n_warmup,config):
         for k in range(length_cycle):
             metropolis_move(config)
     
-        
-    
         Angles=config.angles
-   
         Circulation=np.zeros(Angles.shape)
-
         data = -(np.cos(Angles-np.roll(Angles,1,1))+np.cos(Angles-np.roll(Angles,-1,1))+np.cos(Angles-np.roll(Angles,1,0))+np.cos(Angles-np.roll(Angles,-1,0)))
     
         Number_Vortices =0
@@ -68,14 +45,10 @@ def monte_Carlo(n_cycles,n_warmup,config):
                         else : 
                             Number_AntiVortices+=1
 
-                        
-    
         Vortices.append(Number_Vortices)
         if l%20==0 : 
             print(l/20,config.beta)
-        
             config.beta=max(0,config.beta+0.01)
-            
             DATA.append([config.beta,np.mean(np.array(Vortices))])
             Vortices=[]
             
